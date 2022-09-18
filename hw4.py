@@ -72,11 +72,30 @@ def Make_Pol(degree):
 # Задача 5 (Даны два файла, в каждом из которых находится запись многочлена. Задача - сформировать файл, содержащий сумму многочленов)
 with open('file1.txt') as file1:
     pol1 = file1.read()
-print(pol1)
+# print(pol1)
 
-# with open('file2.txt') as file2:
-#     pol2 = file2.read()
+with open('file2.txt') as file2:
+    pol2 = file2.read()
 # print(pol2)
 
 pol1 = pol1.split(' ')
-print(pol1)
+pol2 = pol2.split(' ')
+index_a = 0
+index_b = 6
+index_c = 10
+pol_sum = []
+for i in range(len(pol1)):
+    if i == index_a:
+        pol_sum.append(int(pol1[index_a]) + int(pol1[index_a]))
+    elif i == index_b:
+        pol_sum.append(int(pol1[index_b]) + int(pol1[index_b]))
+    elif i == index_c:
+        pol_sum.append(int(pol1[index_c]) + int(pol1[index_c]))
+    else:
+        pol_sum.append(pol1[i])
+
+
+# print(" ".join(map(str, pol_sum)))
+file_sum = open('file_sum.txt', 'w')
+file_sum.writelines(" ".join(map(str, pol_sum)))
+
