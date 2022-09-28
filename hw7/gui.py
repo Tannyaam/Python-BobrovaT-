@@ -8,3 +8,4 @@ def return_phone_book():
     print('Фамилия, имя, телефон, описание:')
     for i in range(len(all_contacts)):
         print(all_contacts[i])
+    return all_contacts

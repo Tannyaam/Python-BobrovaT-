@@ -3,37 +3,37 @@ import gui
 def add_new_contact():
     file = open('contacts.txt', 'a')
     new_contact = input('Введите фамилию контакта: ')
+    new_contact += ', '
     new_contact += input('Введите имя контакта: ')
-    new_contact += '\n'
+    new_contact += ', '
     new_contact += input('Введите телефон контакта: ')
-    new_contact += '\n'
+    new_contact += ', '
     new_contact += input('Введите описание контакта: ')
     file.writelines(f'\n{new_contact}')
 
 def delete_contact():
-    gui.return_phone_book
+    all_contacts = gui.return_phone_book()
     input_contact = input('Введите фамилию контакта, который нужно удалить: ')
-    for i in range(len(gui.all_contacts)):
-        if gui.all_contacts[i] == input_contact:
-            gui.all_contacts.remove(gui.all_contacts[i])
+    for i in range(len(all_contacts)):
+        if input_contact in all_contacts[i]:
+            all_contacts.remove(all_contacts[i])
             break
     file = open('contacts.txt', 'w')
-    file.writelines('')
-    file = open('contacts.txt', 'a')
-    for i in range(len(gui.all_contacts)):
-        file.writelines('\n')
-        file.writelines(f'{gui.all_contacts[i]}')
+    # file.writelines('')
+    # file = open('contacts.txt', 'a')
+    for i in range(len(all_contacts)):
+        file.writelines(f'{all_contacts[i]}\n')
     
 def change_information ():
-    gui.return_phone_book
+    all_contacts = gui.return_phone_book()
     input_contact = input('Введите фамилию контакта, который нужно изменить: ')
-    for i in range(len(gui.all_contacts)):
-        if input_contact in gui.all_contacts[i]:
-            gui.all_contacts.remove(gui.all_contacts[i])
+    for i in range(len(all_contacts)):
+        if input_contact in all_contacts[i]:
+            all_contacts.remove(all_contacts[i])
             break
     file = open('contacts.txt', 'w')
-    file.writelines('')
-    file = open('contacts.txt', 'a')
+    # file.writelines('')
+    # file = open('contacts.txt', 'a')
     new_contact = input('Введите фамилию контакта: ')
     new_contact += ', '
     new_contact += input('Введите имя контакта: ')
@@ -42,9 +42,8 @@ def change_information ():
     new_contact += ', '
     new_contact += input('Введите описание контакта: ')
     file.writelines(f'{new_contact}')
-    for i in range(len(gui.all_contacts)):
-        file.writelines('\n')
-        file.writelines(f'{gui.all_contacts[i]}')
+    for i in range(len(all_contacts)):
+        file.writelines(f'\n{all_contacts[i]}')
 
 def find_contact():
     file = open('contacts.txt', 'r')
