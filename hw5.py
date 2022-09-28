@@ -85,78 +85,78 @@ player_2 = '0'
 print(pole)
 
 
-# def First_player_turn(pole):
-#     print('Игрок 1: Укажите номер ячейки, соответствующий вашему ходу: ')
-#     turn = input()
-#     player_1 = 'X'
-#     for i in range(len(pole)):
-#         if pole[i] == turn:
-#             pole = pole.replace(pole[i], player_1)
-#             break
-#     print(pole)
-#     return str(pole)
+def First_player_turn(pole):
+    print('Игрок 1: Укажите номер ячейки, соответствующий вашему ходу: ')
+    turn = input()
+    player_1 = 'X'
+    for i in range(len(pole)):
+        if pole[i] == turn:
+            pole = pole.replace(pole[i], player_1)
+            break
+    print(pole)
+    return str(pole)
 
-# def Second_player_turn(pole):
-#     print('Игрок 2: Укажите номер ячейки, соответствующий вашему ходу: ')
-#     turn = input()
-#     player_2 = '0'
-#     for i in range(len(pole)):
-#         if pole[i] == turn:
-#             pole = pole.replace(pole[i], player_2)
-#             break
-#     print(pole)
-#     return pole
+def Second_player_turn(pole):
+    print('Игрок 2: Укажите номер ячейки, соответствующий вашему ходу: ')
+    turn = input()
+    player_2 = '0'
+    for i in range(len(pole)):
+        if pole[i] == turn:
+            pole = pole.replace(pole[i], player_2)
+            break
+    print(pole)
+    return pole
 
-# for turn_number in range(1, 10):
-#     if turn_number % 2 == 0 :
-#         pole = Second_player_turn(pole)
-#         if ((pole[index_1] == pole[index_2] == pole[index_3] == '0') 
-#         or (pole[index_4] == pole[index_5] == pole[index_6] == '0') 
-#         or (pole[index_7] == pole[index_8] == pole[index_9] == '0')
-#         or (pole[index_1] == pole[index_4] == pole[index_7] == '0')
-#         or (pole[index_2] == pole[index_5] == pole[index_8] == '0')
-#         or (pole[index_3] == pole[index_6] == pole[index_9] == '0')
-#         or (pole[index_1] == pole[index_5] == pole[index_9] == '0')
-#         or (pole[index_3] == pole[index_5] == pole[index_7] == '0')):
-#             print('Второй игрок выиграл')
-#             exit()
-#     else:
-#         pole = First_player_turn(pole)
-#         if ((pole[index_1] == pole[index_2] == pole[index_3] == 'X') 
-#         or (pole[index_4] == pole[index_5] == pole[index_6] == 'X') 
-#         or (pole[index_7] == pole[index_8] == pole[index_9] == 'X')
-#         or (pole[index_1] == pole[index_4] == pole[index_7] == 'X')
-#         or (pole[index_2] == pole[index_5] == pole[index_8] == 'X')
-#         or (pole[index_3] == pole[index_6] == pole[index_9] == 'X')
-#         or (pole[index_1] == pole[index_5] == pole[index_9] == 'X')
-#         or (pole[index_3] == pole[index_5] == pole[index_7] == 'X')):
-#             print('Первый игрок выиграл')
-#             exit()
-#     if turn_number == 9:
-#         print('Ничья, игра окончена')
+for turn_number in range(1, 10):
+    if turn_number % 2 == 0 :
+        pole = Second_player_turn(pole)
+        if ((pole[index_1] == pole[index_2] == pole[index_3] == '0') 
+        or (pole[index_4] == pole[index_5] == pole[index_6] == '0') 
+        or (pole[index_7] == pole[index_8] == pole[index_9] == '0')
+        or (pole[index_1] == pole[index_4] == pole[index_7] == '0')
+        or (pole[index_2] == pole[index_5] == pole[index_8] == '0')
+        or (pole[index_3] == pole[index_6] == pole[index_9] == '0')
+        or (pole[index_1] == pole[index_5] == pole[index_9] == '0')
+        or (pole[index_3] == pole[index_5] == pole[index_7] == '0')):
+            print('Второй игрок выиграл')
+            exit()
+    else:
+        pole = First_player_turn(pole)
+        if ((pole[index_1] == pole[index_2] == pole[index_3] == 'X') 
+        or (pole[index_4] == pole[index_5] == pole[index_6] == 'X') 
+        or (pole[index_7] == pole[index_8] == pole[index_9] == 'X')
+        or (pole[index_1] == pole[index_4] == pole[index_7] == 'X')
+        or (pole[index_2] == pole[index_5] == pole[index_8] == 'X')
+        or (pole[index_3] == pole[index_6] == pole[index_9] == 'X')
+        or (pole[index_1] == pole[index_5] == pole[index_9] == 'X')
+        or (pole[index_3] == pole[index_5] == pole[index_7] == 'X')):
+            print('Первый игрок выиграл')
+            exit()
+    if turn_number == 9:
+        print('Ничья, игра окончена')
 
 
 # Задача 4 (Реализуйте RLE алгоритм: реализуйте модуль сжатия и восстановления данных. Входные и выходные данные хранятся в отдельных текстовых файлах)
 # str_ing = 'aaaaaabbbbccdeeeefff'
 # str_f = ""
 
-file = open('file_hw5.txt', 'r')
-str_ing = file.read()
-file2 = open('file2_hw5.txt', 'w')
+# file = open('file_hw5.txt', 'r')
+# str_ing = file.read()
+# file2 = open('file2_hw5.txt', 'w')
 
-str_f = ''
-i = 0
-while i < len(str_ing):
-    j = i + 1
-    count = 1
-    search_char = str_ing[i]
-    while (j < len(str_ing)) and (str_ing[j] == search_char):
-        count += 1
-        j += 1
-    if count > 0:
-        i += count
-    else:
-        i += 1
-    str_f = str_f + search_char + str(count)
+# str_f = ''
+# i = 0
+# while i < len(str_ing):
+#     j = i + 1
+#     count = 1
+#     search_char = str_ing[i]
+#     while (j < len(str_ing)) and (str_ing[j] == search_char):
+#         count += 1
+#         j += 1
+#     if count > 0:
+#         i += count
+#     else:
+#         i += 1
+#     str_f = str_f + search_char + str(count)
 
-file2.writelines(str_f)
+# file2.writelines(str_f)
