@@ -1,5 +1,6 @@
 import gui
 import csv
+import support_actions
 
 def add_new_contact():
     surname = input('Введите фамилию контакта: ')
@@ -8,11 +9,11 @@ def add_new_contact():
     contact_info = input('Введите описание контакта: ')
     new_contact = [surname, name, phone_num, contact_info]
     with open('contacts.csv', 'a') as file:
-        writer = csv.writer(file, delimiter = ';')
+        writer = csv.writer(file, delimiter = ';', lineterminator = '\r')
         writer.writerow(new_contact)
 
 def delete_contact():
-    gui.return_phone_book()
+    support_actions.return_phone_book()
     input_contact = input('Введите фамилию контакта, который нужно удалить: ')
     file = open('contacts.csv', 'r')
     reader = csv.reader(file, delimiter = ';')
@@ -21,12 +22,12 @@ def delete_contact():
         if input_contact != row[0]:
             reader2.append(row)
     file = open('contacts.csv', 'w')
-    for row in reader2:
-        writer = csv.writer(file, delimiter = ';', lineterminator = '\r')
-        writer.writerow(row)
+    writer = csv.writer(file, delimiter = ';', lineterminator = '\r')
+    writer.writerows(reader2)
+    print('\nКонтакт удален\n')
     
 def change_information ():
-    gui.return_phone_book()
+    support_actions.return_phone_book()
     input_contact = input('Введите фамилию контакта, который нужно изменить: ')
     file = open('contacts.csv', 'r')
     reader = csv.reader(file, delimiter = ';')
@@ -41,9 +42,9 @@ def change_information ():
     new_contact = [surname, name, phone_num, contact_info]
     reader2.append(new_contact)
     file = open('contacts.csv', 'w')
-    for row in reader2:
-        writer = csv.writer(file, delimiter = ';', lineterminator = '\r')
-        writer.writerow(row)
+    writer = csv.writer(file, delimiter = ';', lineterminator = '\r')
+    writer.writerows(reader2)
+    print('\nКонтакт успешно изменен\n')
 
 def find_contact():
     file = open('contacts.csv', 'r')
@@ -52,22 +53,10 @@ def find_contact():
     for row in reader:
         if row[0] == input_contact:
             print('{:<15}{:<15}{:<15}{:<15}'.format(*row))
+            break
 
 def show_all():
     file = open('contacts.csv', 'r')
     reader = csv.reader(file, delimiter = ';')
     for row in reader:
         print('{:<15}{:<15}{:<15}{:<15}'.format(*row))    
-
-def action_selection(action_number):
-    if action_number == 1:
-        act = add_new_contact()
-    elif action_number == 2:
-        act = delete_contact()
-    elif action_number == 3:
-        act = change_information()
-    elif action_number == 4:
-        act = find_contact()
-    elif action_number == 5:
-        act = show_all()
-    return act
