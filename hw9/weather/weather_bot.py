@@ -1,27 +1,27 @@
-import telebot
+from config import open_weather_token
+from pprint import pprint
 import requests
-import json
 
-api_token = '5750716847:AAH3xvr2fTvIUUgIXhizLtmjTv0JX_WHIls'
+def get_weather(city, open_weather_token):
+    try:
+        r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={open_weather_token}&units=metric')
+        data = r.json()
 
-url = "https://api.weather.yandex.ru/v2/informers?lat=55.75222&lon=37.61556"
-headers = {"X-Yandex-API-Key": "fd038f59-339f-4cf9-9d98-ab8a60ec9586"}
+        city = data['name']
+        cur_weather = data['main']['temp']
+        humidity = data['main']['humidity']
+        pressure = data['main']['pressure']
+        wind = data['wind']['speed']
 
-bot = telebot.TeleBot(api_token)
+        pprint(f'Погода в городе {city}:\n\nтемпература {cur_weather}C\nвлажность {humidity}%\nдавление {pressure} мм. рт. ст.\nскорость ветра {wind} м/с')
 
-@bot.message_handler(commands=['start'])
-def get_weather(message):
-    bot.send_message(message.chat.id, text=f'Привет, {message.from_user.username}!\n\nРасскажу о погоде по команде /get_weather')
+    except Exception as ex:
+        pprint('Проверьте название города')
+    pass
 
-@bot.message_handler(commands=['get_weather'])
-def get_weather(message):
-    r = requests.get(url=url, headers=headers)
-    bot.send_message(message.chat.id, r.text)
-    if r.status_code == 200:
-        data = json.loads(r.text)
-        fact = data["fact"]
-        bot.send_message(message.chat.id, text=f'Now {fact["temp"]}°, feels like {fact["feels_like"]}°. Now on the street {fact["condition"]}')
-    else:
-        bot.send_message(message.chat.id, 'Problems on weather API')
+def main():
+    city = input('Введите город: ')
+    get_weather(city, open_weather_token)
 
-bot.polling(none_stop=True)
+if __name__ == '__main__':
+    main()
