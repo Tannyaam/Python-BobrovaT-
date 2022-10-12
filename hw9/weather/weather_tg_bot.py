@@ -4,7 +4,7 @@ from config import tg_bot_token, open_weather_token
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
-
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from aiogram.types import ReplyKeyboardRemove, \
     ReplyKeyboardMarkup, KeyboardButton, \
     InlineKeyboardMarkup, InlineKeyboardButton
@@ -25,9 +25,15 @@ markup3 = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).add(
 async def process_hi3_command(message: types.Message):
     await message.reply("Узнай погоду в других городах", reply_markup=markup3)
 
+@bot.message_handler(commands=["geo"])
+async def geo(message: types.Message):
+    button_geo = ReplyKeyboardMarkup(resize_keyboard=True).add(KeyboardButton('Отправить свою локацию 🗺️', request_location=True))
+    await message.reply("Поделись своим местоположением и узнай погоду!", reply_markup=button_geo)
+
 @dp.message_handler(commands=['start'])
 async def get_weather_command(message: types.Message):
     await message.reply('Привет! Напиши название города и я пришлю сводку погоды!')
+
 
 @dp.message_handler(commands=['help'])
 async def help_command(message: types.Message):
